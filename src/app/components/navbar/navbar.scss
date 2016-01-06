@@ -2,11 +2,11 @@
   color: white;
 }
 
-.nav a { font-size: 16px; }
+.navbar a { font-size: 16px; }
 .navbar-brand {font-size: 20px;}
 
 .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
-  color: #5AADBB;
+  color: $navbar-inverse-link-color;
   cursor: default;
 }
 .nav .dropdown-menu li a {

@@ -1,11 +1,23 @@
 angular.module 'workloadPlanner'
-  .directive 'acmeNavbar', ->
+  .directive 'workloadPlannerNavbar', ->
+    'ngInject'
 
-    NavbarController = (moment) ->
+    NavbarController = (moment, $log, $rootScope, $translate) ->
       'ngInject'
       vm = this
-      # "vm.creation" is avaible by directive option "bindToController: true"
-      vm.relativeDate = moment(vm.creationDate).fromNow()
+
+      # "vm.creation" is avaible by directive option "bindToController: true" # (was previously given from MainController)
+      # vm.relativeDate = moment(vm.creationDate).fromNow()
+
+      vm.activeRoute = undefined
+      $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+        $log.log 'State change success event', event, toState, toParams, fromState, fromParams
+        vm.activeRoute = toState.name
+
+      vm.currentLanguage = -> 'navigation.language.' + if $translate.use() == 'en_EN' then 'de_DE' else 'en_EN'
+      vm.toggleLanguage = ->
+        $translate.use( if $translate.use() == 'en_EN' then 'de_DE' else 'en_EN')
+
       return
 
     directive =

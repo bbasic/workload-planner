@@ -22,7 +22,7 @@
 
 
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-  <div class="container">
+  <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
@@ -34,24 +34,32 @@
       <span class="navbar-brand" href="#">
         <i class="fa fa-lg fa-calendar"></i>
         <span class="hidden-xs">Workload Planner</span>
-        <span class="visible-xs-inline">WP - </span>
-        <span class="visible-xs-inline">TODO: Show active route</span>
+        <span class="visible-xs-inline">::</span>
+        <span class="visible-xs-inline small">
+          <i class="fa fa-lg" ng-class="{'fa-balance-scale': vm.activeRoute == 'planner', 'fa-users': vm.activeRoute == 'persons', 'fa-tasks': vm.activeRoute == 'tasks'}"></i>
+          <span translate="navigation.{{vm.activeRoute}}"></span>
+        </span>
       </span>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'" ng-click="navCollapsed=true">
       <ul class="nav navbar-nav">
-        <li class=""><a href="#"><i class="fa fa-lg fa-balance-scale"></i> Planner</a></li>
-        <li><a href="#"><i class="fa fa-lg fa-users"></i> Persons</a></li>
-        <li class="active"><a href="#"><i class="fa fa-lg fa-tasks"></i> Tasks</a></li>
+        <li ui-sref-active="active"><a ui-sref="planner"><i class="fa fa-lg fa-balance-scale"></i> <span translate>navigation.planner</span></a></li>
+        <li ui-sref-active="active"><a ui-sref="persons"><i class="fa fa-lg fa-users"></i> <span translate>navigation.persons</span></a></li>
+        <li ui-sref-active="active"><a ui-sref="tasks"><i class="fa fa-lg fa-tasks"></i> <span translate>navigation.tasks</span></a></li>
+      </ul>
+
+      <!-- <p class="navbar-text navbar-right"></p> -->
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="" class="navbar-link" ng-click="vm.toggleLanguage()"><i class="fa fa-lg fa-fw fa-language"></i> <span translate>{{vm.currentLanguage()}}</span></a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li uib-dropdown>
-          <a href="#" class="dropdown-toggle" uib-dropdown-toggle role="button" ng-click="$event.stopPropagation();"><i class="fa fa-lg fa-database"></i> Data<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" uib-dropdown-toggle role="button" ng-click="$event.stopPropagation();"><i class="fa fa-lg fa-database"></i> <span translate>navigation.data</span><span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#"><i class="fa fa-lg fa-fw fa-download"></i> <span translate>Import</span></a></li>
-            <li><a href="#"><i class="fa fa-lg fa-fw fa-upload"></i> <span translate>Export</span></a></li>
+            <li><a href="#/data/import"><i class="fa fa-lg fa-fw fa-download"></i> <span translate>navigation.data.import</span></a></li>
+            <li><a href="#/data/export"><i class="fa fa-lg fa-fw fa-upload"></i> <span translate>navigation.data.export</span></a></li>
           </ul>
         </li>
       </ul>
