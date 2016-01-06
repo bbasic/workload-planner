@@ -1,4 +1,4 @@
-<nav class="navbar navbar-static-top navbar-inverse">
+<!-- <nav class="navbar navbar-static-top navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="https://github.com/Swiip/generator-gulp-angular">
@@ -18,4 +18,43 @@
       </ul>
     </div>
   </div>
+</nav> -->
+
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <span class="navbar-brand" href="#">
+        <i class="fa fa-lg fa-calendar"></i>
+        <span class="hidden-xs">Workload Planner</span>
+        <span class="visible-xs-inline">WP - </span>
+        <span class="visible-xs-inline">TODO: Show active route</span>
+      </span>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'" ng-click="navCollapsed=true">
+      <ul class="nav navbar-nav">
+        <li class=""><a href="#"><i class="fa fa-lg fa-balance-scale"></i> Planner</a></li>
+        <li><a href="#"><i class="fa fa-lg fa-users"></i> Persons</a></li>
+        <li class="active"><a href="#"><i class="fa fa-lg fa-tasks"></i> Tasks</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li uib-dropdown>
+          <a href="#" class="dropdown-toggle" uib-dropdown-toggle role="button" ng-click="$event.stopPropagation();"><i class="fa fa-lg fa-database"></i> Data<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#"><i class="fa fa-lg fa-fw fa-download"></i> <span translate>Import</span></a></li>
+            <li><a href="#"><i class="fa fa-lg fa-fw fa-upload"></i> <span translate>Export</span></a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>
