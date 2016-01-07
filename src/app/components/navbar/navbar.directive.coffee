@@ -11,12 +11,10 @@ angular.module 'workloadPlanner'
 
       vm.activeRoute = undefined
       $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
-        $log.log 'State change success event', event, toState, toParams, fromState, fromParams
         vm.activeRoute = toState.name
 
       vm.currentLanguage = -> 'navigation.language.' + if $translate.use() == 'en_EN' then 'de_DE' else 'en_EN'
-      vm.toggleLanguage = ->
-        $translate.use( if $translate.use() == 'en_EN' then 'de_DE' else 'en_EN')
+      vm.toggleLanguage = -> $translate.use( if $translate.use() == 'en_EN' then 'de_DE' else 'en_EN')
 
       return
 
