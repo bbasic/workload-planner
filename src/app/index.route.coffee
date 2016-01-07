@@ -21,5 +21,7 @@ angular.module 'workloadPlanner'
       .state 'tasks',
         url: '/tasks',
         templateUrl: 'app/partials/tasks.html'
+        controller: 'MainController'
+        controllerAs: 'vm'
 
     $urlRouterProvider.otherwise '/planner'

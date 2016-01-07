@@ -34,6 +34,11 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
   }
 }
 
+.tasks li {
+  &.ng-enter{animation: bounceIn 1s;}
+  &.ng-leave{animation: bounceOut 1s;}
+}
+
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically

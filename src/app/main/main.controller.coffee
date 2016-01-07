@@ -1,5 +1,5 @@
 angular.module 'workloadPlanner'
-  .controller 'MainController', ($timeout, webDevTec, toastr) ->
+  .controller 'MainController', ($timeout, webDevTec, toastr, $log) ->
     'ngInject'
     vm = this
     activate = ->
@@ -27,4 +27,12 @@ angular.module 'workloadPlanner'
     vm.creationDate = 1451903816692
     vm.showToastr = showToastr
     activate()
+    
+    vm.things = [{name:'one'}, {name:'two'}, {name:'three'}, {name:'four'}]
+    vm.remove = ($index, elem)->
+      $log.log 'elem', elem
+      elem._deleted = true
+      # angular.element('#yourElement').addClass('fadeOut')
+      vm.things.splice($index, 1)
+      return
     return
