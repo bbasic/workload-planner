@@ -36,6 +36,13 @@
         "assets/fonts/bootstrap/glyphicons-halflings-regular.woff",
         "assets/fonts/bootstrap/glyphicons-halflings-regular.woff2"
       ]
+    },
+    "moment": {
+      "main": [
+        "min/moment.min.js",
+        "locale/de-at.js",
+        "locale/fa.js"
+      ]
     }
   },
   "resolutions": {
