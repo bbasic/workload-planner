@@ -7,7 +7,7 @@ angular.module 'workloadPlanner'
 
       activate = ->
         getContributors().then ->
-          $log.info 'Activated Contributors View'
+          # $log.info 'Activated Contributors View'
           return
 
       getContributors = ->

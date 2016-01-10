@@ -27,6 +27,11 @@ angular.module 'workloadPlanner'
       'navigation.data.import': 'Importieren'
       'navigation.language.en_EN': 'En'
       'navigation.language.de_DE': 'De'
+
+      # PERSONS
+      'persons.firstName': 'Vorname'
+      'persons.lastName': 'Nachname'
+
     }
     $translateProvider.translations 'en_EN', {
       # NAVIGATION
@@ -39,4 +44,9 @@ angular.module 'workloadPlanner'
       'navigation.data.import': 'Import'
       'navigation.language.en_EN': 'En'
       'navigation.language.de_DE': 'De'
+
+      # PERSONS
+      'persons.firstName': 'First Name'
+      'persons.lastName': 'Last Name'
+
     }

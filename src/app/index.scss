@@ -39,6 +39,28 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
   &.ng-leave{animation: bounceOut 1s;}
 }
 
+.actions, .actions div {
+  float: right;
+  display: inline-flex;
+
+  & button {
+    margin-right: 8px;
+    &:last-child {margin-right: 0;}
+  }
+}
+
+persons table tr {
+  &.ng-enter{animation: bounceIn 1s;}
+  &.ng-leave{animation: bounceOut 1s;}
+  
+  td {
+    vertical-align: middle !important;
+  }
+  .larger {
+    font-size: $font-size-h4;
+  }
+}
+
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically

@@ -1,0 +1,47 @@
+<div class="table-responsive_not">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th># <span class="sr-only">number</span></th>
+        <th translate>persons.firstName</th>
+        <th translate>persons.lastName</th>
+        <th><button type="button" ng-click="vm.add()" class="btn btn-primary pull-right"><i class="fa fa-plus"></i></button></th>
+      </tr>
+    </thead>
+    <tbody>
+      <form name="personForm" novalidate>
+        <tr ng-repeat="person in vm.persons" ng-class="{active: person._edit, warning: person._delete}" ng-form="repeatForm">
+          <td class="small">{{$index + 1}}</td>
+          <td class="larger">
+            <div ng-if="person._edit" class="form-groupg" ng-class="{'has-error': repeatForm.firstName.$invalid && !reapeatForm.firstName.$pristine}">
+              <input type="text" name="firstName" class="form-control" ng-model="person.firstName" ng-keyup="vm.keyUp($event, $index, person)" autofocus required>
+            </div>
+            <span ng-if="!person._edit">{{person.firstName}}</span>
+          </td>
+          <td class="larger">
+            <div ng-if="person._edit" class="form-groupg" ng-class="{'has-error': repeatForm.lastName.$invalid}">
+              <input type="text" name="lastName" class="form-control" ng-model="person.lastName" ng-keyup="vm.keyUp($event, $index, person)">
+            </div>
+            <span ng-if="!person._edit">{{person.lastName}}</span>
+          </td>
+          <td>
+            <div class="actions">
+              <div ng-if="!person._edit && !person._delete">
+                <button type="button" class="btn btn-default" ng-click="vm.edit(person)"><i class="fa fa-pencil"></i><span class="sr-only">edit</span></button>
+                <button type="button" class="btn btn-default" ng-click="vm.delete($index, person)"><i class="fa fa-trash-o"></i><span class="sr-only">delete</span></button>
+              </div>
+              <div ng-if="person._edit">
+                <button type="button" class="btn btn-primary" ng-disabled="repeatForm.$invalid" ng-click="person._edit = false"><i class="fa fa-floppy-o"></i><span class="sr-only">save</span></button>
+                <button type="button" class="btn btn-warning" ng-click="vm.cancle($index, person)"><i class="fa fa-times"></i><span class="sr-only">cancle</span></button>
+              </div>
+              <div ng-if="person._delete">
+                <button type="button" class="btn btn-primary" ng-click="vm.delete($index, person, true)"><i class="fa fa-trash-o"></i><span class="sr-only">delete</span></button>
+                <button type="button" class="btn btn-warning" ng-click="person._delete = false"><i class="fa fa-times"></i><span class="sr-only">cancle</span></button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </form>
+    </tbody>
+  </table>
+</div>
