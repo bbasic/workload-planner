@@ -49,17 +49,32 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
   }
 }
 
-persons table tr {
-  &.ng-enter{animation: bounceIn 1s;}
-  &.ng-leave{animation: bounceOut 1s;}
-  
-  td {
-    vertical-align: middle !important;
-  }
-  .larger {
-    font-size: $font-size-h4;
+persons {
+
+  table tr {
+    &.ng-enter{animation: bounceIn 0.5s;}
+    &.ng-leave{animation: zoomOutLeft 0.5s;}
+    &.adding-object {animation: none}
+
+    td {
+      vertical-align: middle !important;
+    }
+    .larger {
+      font-size: $font-size-h4;
+    }
   }
 }
+
+
+// .person {
+//   border: 1px solid #8e209f;
+//   border-radius: 5px;
+//   & .actions div{ display:none; }
+//   &:hover .actions div { display:inline-flex; }
+//   .larger {
+//     font-size: $font-size-h4;
+//   }
+// }
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
