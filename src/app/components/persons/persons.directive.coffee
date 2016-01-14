@@ -26,13 +26,16 @@ angular.module 'workloadPlanner'
         else
           person._delete = true
 
-      save = () ->
-        vm.persons.push(angular.copy(vm.newPerson))
-        vm.newPerson = undefined
-        vm.persons.sort ((a,b)-> a.firstName.toLowerCase() > b.firstName.toLowerCase())
+      save = (person = undefined) ->
+        if person?._edit 
+          person._edit = false
+        else
+          vm.persons.push(angular.copy(vm.newPerson))
+          vm.newPerson = undefined
+          vm.persons.sort ((a,b)-> a.firstName.toLowerCase() > b.firstName.toLowerCase())
 
       keyUp = ($event, person) ->
-        if $event.keyCode == 13 then save()
+        if $event.keyCode == 13 then save(person)
 
       cancle = (person) ->
         person._edit = false

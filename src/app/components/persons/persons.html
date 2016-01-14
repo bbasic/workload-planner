@@ -38,7 +38,7 @@
               <td class="small">{{$index + 1}}</td>
               <td class="larger">
                 <div ng-if="person._edit" class="form-groupg" ng-class="{'has-error': repeatForm.firstName.$invalid && !reapeatForm.firstName.$pristine}">
-                  <input type="text" name="firstName" class="form-control" ng-model="person.firstName" ng-keyup="vm.keyUp($event, person)" autofocus required>
+                  <input type="text" name="firstName" class="form-control" ng-model="person.firstName" ng-keyup="vm.keyUp($event, person)" auto-focus required>
                 </div>
                 <span ng-if="!person._edit">{{person.firstName}}</span>
               </td>
