@@ -1,5 +1,5 @@
 angular.module 'workloadPlanner'
-  .config ($logProvider, toastrConfig) ->
+  .config ($logProvider, toastrConfig, moment) ->
     'ngInject'
     # Enable log
     $logProvider.debugEnabled true
@@ -9,6 +9,9 @@ angular.module 'workloadPlanner'
     toastrConfig.positionClass = 'toast-top-right'
     toastrConfig.preventDuplicates = true
     toastrConfig.progressBar = true
+    
+    # set moment locale
+    moment.locale('de-at')
 
   .config ($translateProvider) ->
     'ngInject'
@@ -31,6 +34,10 @@ angular.module 'workloadPlanner'
       # PERSONS
       'persons.firstName': 'Vorname'
       'persons.lastName': 'Nachname'
+      
+      # TASKS
+      'tasks.taskName': 'Name'
+      'tasks.activeDays': 'Ausführende Tage'
 
     }
     $translateProvider.translations 'en_EN', {
@@ -49,4 +56,7 @@ angular.module 'workloadPlanner'
       'persons.firstName': 'First Name'
       'persons.lastName': 'Last Name'
 
+      # TASKS
+      'tasks.taskName': 'Name'
+      'tasks.activeDays': 'Active days'
     }

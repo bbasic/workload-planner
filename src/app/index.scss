@@ -49,7 +49,7 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
   }
 }
 
-persons {
+persons, tasks {
 
   table tr {
     &.ng-enter{animation: bounceIn 0.5s;}
@@ -64,7 +64,13 @@ persons {
     }
   }
 }
-
+tasks td {
+  label {
+    margin-right: 1em;
+    .label {font-size: 90%;}
+  }
+  label:last-of-type {margin-right: 0;}
+}
 
 // .person {
 //   border: 1px solid #8e209f;

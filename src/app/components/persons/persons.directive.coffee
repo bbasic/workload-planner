@@ -25,7 +25,7 @@ angular.module 'workloadPlanner'
           person._delete = true
 
       save = (person = undefined) ->
-        if person?._edit 
+        if person?._edit
           person._edit = false
         else
           vm.persons.push(angular.copy(vm.newPerson))
@@ -42,7 +42,7 @@ angular.module 'workloadPlanner'
         delete person['_original']
 
       # PUBLIC
-      vm.persons = persons.getPersons()
+      vm.persons = persons.getPersons().sort ((a,b)-> a.firstName.toLowerCase() > b.firstName.toLowerCase())
       vm.newPerson = undefined
       vm.add = add
       vm.edit = edit

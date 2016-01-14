@@ -1,0 +1,86 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="table-responsive_not">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th># <span class="sr-only">number</span></th>
+            <th translate>tasks.taskName</th>
+            <th translate>tasks.activeDays</th>
+            <th><button type="button" ng-click="vm.add()" ng-hide="vm.newTask != undefined" class="btn btn-primary pull-right"><i class="fa fa-plus"></i></button></th>
+          </tr>
+        </thead>
+        <tbody>
+          <form name="tasksForm" novalidate>
+            <tr ng-if="vm.newTask" class="info adding-object" ng-form="taskForm">
+              <td class="small"></td>
+              <td class="larger">
+                <div ng-class="{'has-error': taskForm.taskName.$invalid && !taskForm.taskName.$pristine}">
+                  <input type="text" name="taskName" class="form-control" ng-model="vm.newTask.taskName" ng-keyup="vm.keyUp($event, vm.newTask)" auto-focus required>
+                </div>
+              </td>
+              <td class="">
+                <div class="btn-group" role="group" aria-label="...">
+                  <button type="button" class="btn" ng-class="{'btn-success': vm.newTask.activeDays[1], 'btn-default': !vm.newTask.activeDays[1]}" ng-click="vm.newTask.activeDays[1] = !vm.newTask.activeDays[1]">{{moment.weekdaysMin()[1]}}</button>
+                  <button type="button" class="btn" ng-class="{'btn-success': vm.newTask.activeDays[2], 'btn-default': !vm.newTask.activeDays[2]}" ng-click="vm.newTask.activeDays[2] = !vm.newTask.activeDays[2]">{{moment.weekdaysMin()[2]}}</button>
+                  <button type="button" class="btn" ng-class="{'btn-success': vm.newTask.activeDays[3], 'btn-default': !vm.newTask.activeDays[3]}" ng-click="vm.newTask.activeDays[3] = !vm.newTask.activeDays[3]">{{moment.weekdaysMin()[3]}}</button>
+                  <button type="button" class="btn" ng-class="{'btn-success': vm.newTask.activeDays[4], 'btn-default': !vm.newTask.activeDays[4]}" ng-click="vm.newTask.activeDays[4] = !vm.newTask.activeDays[4]">{{moment.weekdaysMin()[4]}}</button>
+                  <button type="button" class="btn" ng-class="{'btn-success': vm.newTask.activeDays[5], 'btn-default': !vm.newTask.activeDays[5]}" ng-click="vm.newTask.activeDays[5] = !vm.newTask.activeDays[5]">{{moment.weekdaysMin()[5]}}</button>
+                  <button type="button" class="btn" ng-class="{'btn-success': vm.newTask.activeDays[6], 'btn-default': !vm.newTask.activeDays[6]}" ng-click="vm.newTask.activeDays[6] = !vm.newTask.activeDays[6]">{{moment.weekdaysMin()[6]}}</button>
+                  <button type="button" class="btn" ng-class="{'btn-success': vm.newTask.activeDays[0], 'btn-default': !vm.newTask.activeDays[0]}" ng-click="vm.newTask.activeDays[0] = !vm.newTask.activeDays[0]">{{moment.weekdaysMin()[0]}}</button>
+                </div>
+              </td>
+              <td>
+                <div class="actions">
+                  <div>
+                    <button type="button" class="btn btn-primary" ng-disabled="taskForm.$invalid" ng-click="vm.save()"><i class="fa fa-floppy-o"></i><span class="sr-only">save</span></button>
+                    <button type="button" class="btn btn-warning" ng-click="vm.newTask = undefined"><i class="fa fa-times"></i><span class="sr-only">cancle</span></button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr ng-repeat="task in vm.tasks" ng-class="{active: task._edit, warning: task._delete}" ng-form="repeatForm">
+              <td class="small">{{$index + 1}}</td>
+              <td class="larger">
+                <div ng-if="task._edit" class="form-groupg" ng-class="{'has-error': repeatForm.taskName.$invalid && !reapeatForm.taskName.$pristine}">
+                  <input type="text" name="taskName" class="form-control" ng-model="task.taskName" ng-keyup="vm.keyUp($event, task)" auto-focus required>
+                </div>
+                <span ng-if="!task._edit">{{task.taskName}}</span>
+              </td>
+              <td class="">
+                <fieldset ng-disabled="!task._edit">
+                  <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn" ng-class="{'btn-success': task.activeDays[1], 'btn-default': !task.activeDays[1]}" ng-click="task.activeDays[1] = !task.activeDays[1]">{{moment.weekdaysMin()[1]}}</button>
+                    <button type="button" class="btn" ng-class="{'btn-success': task.activeDays[2], 'btn-default': !task.activeDays[2]}" ng-click="task.activeDays[2] = !task.activeDays[2]">{{moment.weekdaysMin()[2]}}</button>
+                    <button type="button" class="btn" ng-class="{'btn-success': task.activeDays[3], 'btn-default': !task.activeDays[3]}" ng-click="task.activeDays[3] = !task.activeDays[3]">{{moment.weekdaysMin()[3]}}</button>
+                    <button type="button" class="btn" ng-class="{'btn-success': task.activeDays[4], 'btn-default': !task.activeDays[4]}" ng-click="task.activeDays[4] = !task.activeDays[4]">{{moment.weekdaysMin()[4]}}</button>
+                    <button type="button" class="btn" ng-class="{'btn-success': task.activeDays[5], 'btn-default': !task.activeDays[5]}" ng-click="task.activeDays[5] = !task.activeDays[5]">{{moment.weekdaysMin()[5]}}</button>
+                    <button type="button" class="btn" ng-class="{'btn-success': task.activeDays[6], 'btn-default': !task.activeDays[6]}" ng-click="task.activeDays[6] = !task.activeDays[6]">{{moment.weekdaysMin()[6]}}</button>
+                    <button type="button" class="btn" ng-class="{'btn-success': task.activeDays[0], 'btn-default': !task.activeDays[0]}" ng-click="task.activeDays[0] = !task.activeDays[0]">{{moment.weekdaysMin()[0]}}</button>
+                  </div>
+                </fieldset>
+              </td>
+              <td>
+                <div class="actions">
+                  <div ng-if="!task._edit && !task._delete">
+                    <button type="button" class="btn btn-default" ng-click="vm.edit(task)"><i class="fa fa-pencil"></i><span class="sr-only">edit</span></button>
+                    <button type="button" class="btn btn-default" ng-click="vm.delete(task)"><i class="fa fa-trash-o"></i><span class="sr-only">delete</span></button>
+                  </div>
+                  <div ng-if="task._edit">
+                    <button type="button" class="btn btn-primary" ng-disabled="repeatForm.$invalid" ng-click="task._edit=false"><i class="fa fa-floppy-o"></i><span class="sr-only">save</span></button>
+                    <button type="button" class="btn btn-warning" ng-click="vm.cancle(task)"><i class="fa fa-times"></i><span class="sr-only">cancle</span></button>
+                  </div>
+                  <div ng-if="task._delete">
+                    <button type="button" class="btn btn-primary" ng-click="vm.delete(task, true)"><i class="fa fa-trash-o"></i><span class="sr-only">delete</span></button>
+                    <button type="button" class="btn btn-warning" ng-click="task._delete = false"><i class="fa fa-times"></i><span class="sr-only">cancle</span></button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </form>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
