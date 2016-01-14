@@ -1,19 +1,15 @@
 angular.module 'workloadPlanner'
-  .service 'persons', () ->
+  .service 'persons', (workloadData) ->
     'ngInject'
 
-    dataEx = [
-      {
-        firstName: 'Becir'
-        lastName: 'Basic'
-      },
-      {
-        firstName: 'Petra'
-        lastName: 'Zakall'
-      }
-    ]
+    persons = undefined
+    
+    getData = () ->
+      persons = workloadData.getPersons()
+      return persons
 
-    getPersons = () -> dataEx
-
+    dataUpdated = -> workloadData.setPersons(persons)
+      
     service =
-      getPersons: getPersons
+      getData: getData
+      dataUpdated: dataUpdated

@@ -1,19 +1,16 @@
 angular.module 'workloadPlanner'
-  .service 'tasks', () ->
+  .service 'tasks', (workloadData) ->
     'ngInject'
 
-    dataEx = [
-      {
-        taskName: 'Wäsche waschen'
-        activeDays: [ false, true, false, true, true, false, true ]
-      },
-      {
-        taskName: 'Saugen'
-        activeDays: [ true, false, true, true, true, true, false ]
-      }
-    ]
 
-    getTasks = () -> dataEx
+    tasks = undefined
+    
+    getData = () ->
+      tasks = workloadData.getTasks()
+      return tasks
 
+    dataUpdated = -> workloadData.setTasks(tasks)
+      
     service =
-      getTasks: getTasks
+      getData: getData
+      dataUpdated: dataUpdated

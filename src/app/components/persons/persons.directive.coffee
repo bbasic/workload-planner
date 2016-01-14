@@ -21,6 +21,7 @@ angular.module 'workloadPlanner'
       deletePerson = (person, confirmed = false) ->
         if confirmed
           vm.persons.splice(vm.persons.indexOf(person), 1)
+          persons.dataUpdated()
         else
           person._delete = true
 
@@ -31,6 +32,7 @@ angular.module 'workloadPlanner'
           vm.persons.push(angular.copy(vm.newPerson))
           vm.newPerson = undefined
           vm.persons.sort ((a,b)-> a.firstName.toLowerCase() > b.firstName.toLowerCase())
+        persons.dataUpdated()
 
       keyUp = ($event, person) ->
         if $event.keyCode == 13 then save(person)
@@ -42,7 +44,7 @@ angular.module 'workloadPlanner'
         delete person['_original']
 
       # PUBLIC
-      vm.persons = persons.getPersons().sort ((a,b)-> a.firstName.toLowerCase() > b.firstName.toLowerCase())
+      vm.persons = persons.getData().sort ((a,b)-> a.firstName.toLowerCase() > b.firstName.toLowerCase())
       vm.newPerson = undefined
       vm.add = add
       vm.edit = edit

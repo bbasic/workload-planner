@@ -29,6 +29,7 @@ angular.module 'workloadPlanner'
       deleteTask = (task, confirmed = false) ->
         if confirmed
           vm.tasks.splice(vm.tasks.indexOf(task), 1)
+          tasks.dataUpdated()
         else
           task._delete = true
 
@@ -39,6 +40,7 @@ angular.module 'workloadPlanner'
           vm.tasks.push(angular.copy(vm.newTask))
           vm.newTask = undefined
           vm.tasks.sort ((a,b)-> a.taskName.toLowerCase() > b.taskName.toLowerCase())
+        tasks.dataUpdated()
 
       keyUp = ($event, task) ->
         if $event.keyCode == 13 then save(task)
@@ -51,7 +53,7 @@ angular.module 'workloadPlanner'
 
       # PUBLIC
       $scope.moment = moment
-      vm.tasks = tasks.getTasks().sort ((a,b)-> a.taskName.toLowerCase() > b.taskName.toLowerCase())
+      vm.tasks = tasks.getData().sort ((a,b)-> a.taskName.toLowerCase() > b.taskName.toLowerCase())
       vm.newTask = undefined
       vm.add = add
       vm.edit = edit
