@@ -6,11 +6,9 @@ angular.module 'workloadPlanner'
       'ngInject'
       vm = this
 
-      animeRef = 0
       newPerson = -> {
         firstName: undefined
         lastName: undefined
-        _animeRef: animeRef++
       }
 
       add = ->
