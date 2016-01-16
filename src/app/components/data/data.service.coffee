@@ -1,7 +1,7 @@
 angular.module 'workloadPlanner'
-  .service 'workloadData', () ->
+  .service 'workloadData', (localStorage) ->
     'ngInject'
-    
+
     getPersons = -> JSON.parse(localStorage.getItem('workloadData-persons') || '[]')
     setPersons = (persons) -> localStorage.setItem('workloadData-persons', JSON.stringify(persons, ['firstName', 'lastName']))
 
