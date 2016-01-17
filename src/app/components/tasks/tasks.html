@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
+    <h1><span translate>navigation.tasks</span> <span class="badge">{{vm.tasks.length}}</span></h1>
     <div class="table-responsive_not">
       <table class="table table-hover">
         <thead>
@@ -68,7 +69,7 @@
                     <button type="button" class="btn btn-default" ng-click="vm.delete(task)"><i class="fa fa-trash-o"></i><span class="sr-only">delete</span></button>
                   </div>
                   <div ng-if="task._edit">
-                    <button type="button" class="btn btn-primary" ng-disabled="repeatForm.$invalid" ng-click="task._edit=false"><i class="fa fa-floppy-o"></i><span class="sr-only">save</span></button>
+                    <button type="button" class="btn btn-primary" ng-disabled="repeatForm.$invalid" ng-click="vm.save(task)"><i class="fa fa-floppy-o"></i><span class="sr-only">save</span></button>
                     <button type="button" class="btn btn-warning" ng-click="vm.cancle(task)"><i class="fa fa-times"></i><span class="sr-only">cancle</span></button>
                   </div>
                   <div ng-if="task._delete">

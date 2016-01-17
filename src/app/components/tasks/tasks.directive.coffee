@@ -6,21 +6,8 @@ angular.module 'workloadPlanner'
       'ngInject'
       vm = this
 
-      newTask = -> {
-        taskName: undefined
-        activeDays: [
-          false,  # 0 = su
-          false,  # 1 = mo
-          false,  # 2 = tu
-          false,  # 3 = we
-          false,  # 4 = th
-          false,  # 5 = fr
-          false   # 6 = sa
-        ]
-      }
-
       add = ->
-        vm.newTask = newTask()
+        vm.newTask = tasks.newTask()
 
       edit = (task) ->
         task._edit = true
@@ -29,18 +16,19 @@ angular.module 'workloadPlanner'
       deleteTask = (task, confirmed = false) ->
         if confirmed
           vm.tasks.splice(vm.tasks.indexOf(task), 1)
-          tasks.dataUpdated()
+          tasks.dataUpdated(task)
         else
           task._delete = true
 
       save = (task = undefined) ->
         if task?._edit
           task._edit = false
+          tasks.dataUpdated()
         else
           vm.tasks.push(angular.copy(vm.newTask))
           vm.newTask = undefined
           vm.tasks.sort ((a,b)-> a.taskName.toLowerCase() > b.taskName.toLowerCase())
-        tasks.dataUpdated()
+          tasks.dataUpdated(task)
 
       keyUp = ($event, task) ->
         if $event.keyCode == 13 then save(task)

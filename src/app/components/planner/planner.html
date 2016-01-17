@@ -1,4 +1,4 @@
-<h1>Persons <span class="badge">{{vm.persons.length}}</span></h1>
+<!-- <h1>Persons <span class="badge">{{vm.persons.length}}</span></h1>
 <ul>
   <li ng-repeat="person in vm.persons">{{person.firstName}} {{person.lastName}}</li>
 </ul>
@@ -6,4 +6,14 @@
 <h1>Tasks <span class="badge">{{vm.tasks.length}}</span></h1>
 <ul>
   <li ng-repeat="task in vm.tasks">{{task.taskName}} {{task.activeDays}}</li>
-</ul>
+</ul> -->
+<div class="form-group">
+  <label for="weekPicker">
+    <span translate>planner.chooseWeek</span>
+  </label>
+  <input class="" id="weekPicker" type="week" ng-model="vm.week" min="{{vm.minWeek}}" max="{{vm.maxWeek}}" ng-change="vm.weekChanged(vm.week)">
+</div>
+<hr>
+<div class="h2">
+  {{vm.startDay}} - {{vm.endDay}}
+</div>

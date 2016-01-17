@@ -6,13 +6,8 @@ angular.module 'workloadPlanner'
       'ngInject'
       vm = this
 
-      newPerson = -> {
-        firstName: undefined
-        lastName: undefined
-      }
-
       add = ->
-        vm.newPerson = newPerson()
+        vm.newPerson = persons.newPerson()
 
       edit = (person) ->
         person._edit = true
@@ -21,18 +16,19 @@ angular.module 'workloadPlanner'
       deletePerson = (person, confirmed = false) ->
         if confirmed
           vm.persons.splice(vm.persons.indexOf(person), 1)
-          persons.dataUpdated()
+          persons.dataUpdated(person)
         else
           person._delete = true
 
       save = (person = undefined) ->
         if person?._edit
           person._edit = false
+          persons.dataUpdated()
         else
           vm.persons.push(angular.copy(vm.newPerson))
           vm.newPerson = undefined
           vm.persons.sort ((a,b)-> a.firstName.toLowerCase() > b.firstName.toLowerCase())
-        persons.dataUpdated()
+          persons.dataUpdated(person)
 
       keyUp = ($event, person) ->
         if $event.keyCode == 13 then save(person)

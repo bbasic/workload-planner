@@ -9,7 +9,7 @@ angular.module 'workloadPlanner'
     toastrConfig.positionClass = 'toast-top-right'
     toastrConfig.preventDuplicates = true
     toastrConfig.progressBar = true
-    
+
     # set moment locale
     moment.locale('de-at')
 
@@ -34,11 +34,13 @@ angular.module 'workloadPlanner'
       # PERSONS
       'persons.firstName': 'Vorname'
       'persons.lastName': 'Nachname'
-      
+
       # TASKS
       'tasks.taskName': 'Name'
       'tasks.activeDays': 'Ausführende Tage'
 
+      # PLANNER
+      'planner.chooseWeek': 'Woche auswählen'
     }
     $translateProvider.translations 'en_EN', {
       # NAVIGATION
@@ -59,4 +61,7 @@ angular.module 'workloadPlanner'
       # TASKS
       'tasks.taskName': 'Name'
       'tasks.activeDays': 'Active days'
+
+      # PLANNER
+      'planner.chooseWeek': 'Choose Week'
     }
