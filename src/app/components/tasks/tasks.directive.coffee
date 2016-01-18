@@ -16,6 +16,7 @@ angular.module 'workloadPlanner'
       deleteTask = (task, confirmed = false) ->
         if confirmed
           vm.tasks.splice(vm.tasks.indexOf(task), 1)
+          task._deleted = true
           tasks.dataUpdated(task)
         else
           task._delete = true
@@ -25,13 +26,15 @@ angular.module 'workloadPlanner'
           task._edit = false
           tasks.dataUpdated()
         else
-          vm.tasks.push(angular.copy(vm.newTask))
+          task = angular.copy(vm.newTask)
           vm.newTask = undefined
+          vm.tasks.push(task)
           vm.tasks.sort ((a,b)-> a.taskName.toLowerCase() > b.taskName.toLowerCase())
+          task._added = true
           tasks.dataUpdated(task)
 
       keyUp = ($event, task) ->
-        if $event.keyCode == 13 then save(task)
+        if $event.keyCode == 13 && task.taskName then save(task)
 
       cancle = (task) ->
         task._edit = false

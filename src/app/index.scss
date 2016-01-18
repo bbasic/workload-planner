@@ -52,8 +52,8 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 persons, tasks {
 
   table tr {
-    &.ng-enter{animation: bounceIn 0.5s;}
-    &.ng-leave{animation: zoomOutLeft 0.5s;}
+    &.ng-enter{animation: bounceIn 0.3s;}
+    &.ng-leave{animation: zoomOutLeft 0.3s;}
     &.adding-object {animation: none}
 
     td {

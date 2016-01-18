@@ -1,6 +1,10 @@
 angular.module 'workloadPlanner'
   .service 'workloadData', (localStorage, $log, $timeout) ->
     'ngInject'
+    _persons = undefined
+    _tasks = undefined
+    _priorityMatrix = undefined
+    _nextId = {}
 
     diff = (a, b) ->
       if a.length > b.length
@@ -8,40 +12,47 @@ angular.module 'workloadPlanner'
       else
         b.filter((i) -> a.indexOf(i) < 0)
 
-    getPersons = -> JSON.parse(localStorage.getItem('workloadData-persons') || '[]')
+    getPersons = ->
+      if _persons? then return _persons
+      _persons = JSON.parse(localStorage.getItem('workloadData-persons') || '[]')
+      return _persons
+
     setPersons = (persons, person = undefined) ->
+      _persons = persons
       if person?
-        old = getPersons()
         matrix = getPriorityMatrix()
-        if old.length > persons.length
+        if person._deleted
           $log.log 'person deleted', person
           delete matrix[person.id]
-        else
+        else if person._added
           $log.log 'person added', person
           matrix[person.id] = {}
           for t in getTasks()
             sum = 0
-            for p in old
+            for p in persons
               sum += matrix[p.id][t.id]
-            matrix[person.id][t.id] = if sum == 0 then sum else Math.floor(sum / old.length)
+            matrix[person.id][t.id] = if sum == 0 then sum else Math.floor(sum / persons.length)
         setPriorityMatrix(matrix)
       $timeout(
         -> localStorage.setItem('workloadData-persons', JSON.stringify(persons, ['id', 'firstName', 'lastName']))
       , 100)
 
 
-    getTasks = -> JSON.parse(localStorage.getItem('workloadData-tasks') || '[]')
+    getTasks = ->
+      if _tasks? then return _tasks
+      _tasks = JSON.parse(localStorage.getItem('workloadData-tasks') || '[]')
+      return _tasks
     setTasks = (tasks, task = undefined) ->
+      _tasks = tasks
       if task?
-        old = getTasks()
         ps = getPersons()
         matrix = getPriorityMatrix()
-        if old.length > tasks.length
+        if task._deleted
           $log.log 'task deleted', task
           for p in ps
             per = matrix[p.id]
             delete per[task.id]
-        else
+        else if task._added
           $log.log 'task added', task
           for p in ps
             matrix[p.id][task.id] = 0
@@ -60,19 +71,29 @@ angular.module 'workloadPlanner'
           matrix[p.id][t.id] = 0
       return matrix
     getPriorityMatrix = ->
-      pm = JSON.parse(localStorage.getItem('workloadData-priorityMatrix') || '[]')
-      if angular.isArray(pm) then _generatePriorityMatrix() else pm
+      if _priorityMatrix? then return _priorityMatrix
+      _priorityMatrix = JSON.parse(localStorage.getItem('workloadData-priorityMatrix') || '[]')
+      if angular.isArray(_priorityMatrix) then _priorityMatrix = _generatePriorityMatrix()
+      return _priorityMatrix
 
 
     setPriorityMatrix = (priorityMatrix) ->
+      _priorityMatrix = priorityMatrix
       $timeout(
         -> localStorage.setItem('workloadData-priorityMatrix', JSON.stringify(priorityMatrix))
       , 100)
 
     getNextId = (who) ->
+      newId = 0
       key = 'workloadData-'+who+'-id'
-      newId = parseInt(localStorage.getItem(key) || '0') + 1
-      localStorage.setItem(key, newId)
+      if _nextId[who]?
+        newId = _nextId[who] + 1
+      else
+        newId = parseInt(localStorage.getItem(key) || '0') + 1
+      _nextId[who] = newId
+      $timeout(
+        ->localStorage.setItem(key, newId)
+      , 100)
       newId
 
     service =
